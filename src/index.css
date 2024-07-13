@@ -67,6 +67,8 @@ body {
 
 .swiper-pagination-bullet-active {
     background-color: #ff0000;
+    width: 32px;
+    border-radius: 10px;
 }
 
 .my-slider {
@@ -90,4 +92,17 @@ body {
 .swiper-slide .movie-content {
     position: relative;
     z-index: 2;
+}
+
+
+.trend-card::before {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    background-color: black;
 }
