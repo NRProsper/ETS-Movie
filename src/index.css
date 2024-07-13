@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-black text-white;
+    font-size: 16px;
+}
+
+@layer components {
+
+    .btn {
+        @apply flex items-center justify-center p-[10px] text-2xl inline-flex rounded-[5px] cursor-pointer font-medium capitalize gap-[12px];
+    }
+
+    .btn-primary {
+        @apply text-white bg-[red];
+    }
+
+    .btn-outline {
+        @apply border rounded-[5px] border-[red];
+    }
+
+    .flex-center {
+        @apply flex items-center justify-center
+    }
+
+    .flex-between {
+        @apply flex items-center justify-between
+    }
+
+    .nav-item {
+        @apply relative;
+        font-weight: 600;
+        padding: 10px 0;
+        transition: 0.3s ease;
+    }
+
+    .nav-item:not(.active) {
+        @apply hover:text-[red]
+    }
+
+    .nav-item.active::after {
+        @apply absolute rounded-full;
+        content: "";
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 5px;
+        height: 5px;
+        @apply bg-[red];
+    }
+
+    .movie-slider {
+        height: 874px;
+        width: 100%;
+    }
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    opacity: 1;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ff0000;
+}
+
+.my-slider {
+    z-index: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.swiper-slide .movie-content {
+    position: relative;
+    z-index: 2;
+}
