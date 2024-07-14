@@ -11,7 +11,6 @@ const RecentlyUpdated = () => {
         movieService.getAiring()
             .then((response) => {
                 setOnAir(response.data.results)
-                console.log(response.data.results)
             })
             .catch((error) => {
                 console.log(error)
@@ -20,11 +19,11 @@ const RecentlyUpdated = () => {
     }, [])
     return (
         <section id="on-air">
-            <div className="container mx-auto px-16">
+            <div className="container mx-auto px-32">
                 <div className="py-16">
                     <h2 className="text-2xl">Recently Updated</h2>
                     <div className="flex items-end justify-between">
-                        <div className="air-cards mt-12 flex items-center justify-start gap-12">
+                        <div className="air-cards mt-12 flex items-center justify-start gap-20">
                             {onAir.slice(0, 4).map(air => (
                                 <AirCard key={air.id} title={air.original_name}
                                          img={movieService.getPoster(air.poster_path)}/>

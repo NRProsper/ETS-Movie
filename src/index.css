@@ -105,4 +105,33 @@ body {
     width: 100%;
     opacity: 0.5;
     background-color: black;
+    transition: 0.5s ease;
+}
+
+.trend-card:hover::before {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+    background-color: black;
+}
+
+.text-truncate {
+    display: inline-block;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pill, .p-active {
+    @apply p-[8px] rounded-[10px] bg-[red]
+}
+
+.pill-outline {
+    @apply p-[8px] rounded-[10px] border border-[red]
 }

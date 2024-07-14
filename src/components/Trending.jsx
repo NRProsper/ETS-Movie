@@ -39,7 +39,7 @@ const Trending = () => {
 
     return (
         <section id="trending">
-            <div className="container mx-auto p-16">
+            <div className="container mx-auto px-32">
                 <div className="flex-between mb-8">
                     <h2 className="text-2xl font-bold">Trending</h2>
                     <div className="flex-center text-[#D9D9D9FF] text-2xl gap-[8px] cursor-pointer">
@@ -47,7 +47,7 @@ const Trending = () => {
                         <Arrow />
                     </div>
                 </div>
-                <div className="grid grid-cols-3 gap-x-[3px]">
+                <div className="flex flex-between gap-[8px]">
                     {movies.slice(0, 3).map(movie => (
                         <TrendCard key={movie.id} movie={movie} genres={getGenreNames(movie.genre_ids)} />
                     ))}

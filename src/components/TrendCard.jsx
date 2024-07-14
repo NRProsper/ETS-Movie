@@ -2,14 +2,15 @@ import movieService from "../MovieService.js";
 import {CiTimer as Timer} from "react-icons/ci";
 import {BiSolidStar as Star} from "react-icons/bi";
 import {FaPlayCircle as Play} from "react-icons/fa";
+
 const TrendCard = ({movie, genres}) => {
 
 
     return (
         <div
-             className="overflow-hidden cursor-pointer"
+             className="overflow-hidden"
         >
-            <div className="h-[341px] w-[352px] trend-card relative">
+            <div className="h-[341px] w-[352px] trend-card relative cursor-pointer">
                 <img
                     src={movieService.getPoster(movie.poster_path)}
                     alt={movie.title||movie.name}
@@ -26,13 +27,20 @@ const TrendCard = ({movie, genres}) => {
                         <span>{movie.vote_average}</span>
                     </div>
                 </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <div className="play-btn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer">
                     <Play className="text-6xl" />
                 </div>
             </div>
-            <div className="bottom">
+            <div className="bottom mt-2 flex items-center justify-between">
                 <div>
-                    <h2>{movie.title || movie.name}</h2>
+                    <h2 className="font-medium truncate text-truncate text-[18px]">{movie.title || movie.name}</h2>
+                </div>
+                <div className="genres flex-center gap-[16px]">
+                    {
+                        genres.slice(0,2).map((genre, idx) => (
+                            <span className="pill" key={idx}>{genre}</span>
+                        ))
+                    }
                 </div>
             </div>
         </div>
