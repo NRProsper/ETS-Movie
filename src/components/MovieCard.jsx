@@ -3,7 +3,7 @@ import {CiTimer as Timer} from "react-icons/ci";
 const MovieCard = ({movie, tv, className}) => {
     return(
         <div className="flex flex-col space-y-2 cursor-pointer">
-            <div className={`image-container w-[256px] relative ${className}`}>
+            <div className={`image-container w-[full] relative ${className}`}>
                 <img src={movieService.getPoster(movie.poster_path)} alt="" className="rounded-[10px]"/>
                 {
                     tv ? (
@@ -11,7 +11,7 @@ const MovieCard = ({movie, tv, className}) => {
                     ) : ""
                 }
             </div>
-            <div className="bottom flex-between w-[256px]">
+            <div className="bottom flex-between w-[full]">
                 <h2 className="w-[100px] truncate">{movie.title || movie.name}</h2>
                 <div className="right flex-between gap-2">
                     {

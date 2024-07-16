@@ -69,8 +69,8 @@ const Hero = () => {
                             }}
                         >
                             <div
-                                className="movie-content px-32 container mx-auto h-full flex flex-col justify-center items-start space-y-16">
-                                <div className="play-btns w-full flex items-center justify-center gap-[44px] ">
+                                className="movie-content lg:px-32 container mx-auto h-full flex flex-col justify-center items-start space-y-16">
+                                <div className="flex-col sm:flex-row play-btns w-full flex  items-center justify-center gap-[44px]  ">
                                     <Button type="primary">
                                         <span>Watch now</span>
                                         <Play/>
@@ -80,10 +80,10 @@ const Hero = () => {
                                         <FaClock/>
                                     </Button>
                                 </div>
-                                <div className="movie-details text-left">
-                                    <h1 className="font-black text-4xl mb-[24px]">{movie.title}</h1>
-                                    <div className="genres-vote flex gap-[24px] mb-[24px]">
-                                        <div className="genres flex items-center gap-[8px]">
+                                <div className="movie-details text-center md:text-left  px-[16px] md:px-0">
+                                    <h1 className="font-black text-4xl  mb-[24px]">{movie.title}</h1>
+                                    <div className="genres-vote md:flex-row md:flex gap-[24px] mb-[24px] flex-col space-y-2.5 md:space-y-0">
+                                        <div className="genres flex items-center gap-[8px] justify-center md:justify-start">
                                             {
                                                 getGenreNames(movie.genre_ids).map((g, idx) => {
                                                     return (
@@ -93,20 +93,22 @@ const Hero = () => {
                                                 })
                                             }
                                         </div>
-                                        <div className="year flex-center gap-[8px]">
-                                            <Calendar/>
-                                            <span>{new Date(movie.release_date).getFullYear()}</span>
-                                        </div>
-                                        <div className="play-time flex-center gap-[8px]">
-                                            <Timer/>
-                                            <span>3:12:00</span>
-                                        </div>
-                                        <div className="voting flex-center gap-[8px]">
-                                            <Star/>
-                                            <span>{movie.vote_average}</span>
+                                        <div className="right flex items-center justify-center md:justify-start gap-[8px]">
+                                            <div className="year flex-center gap-[8px]">
+                                                <Calendar/>
+                                                <span>{new Date(movie.release_date).getFullYear()}</span>
+                                            </div>
+                                            <div className="play-time flex-center gap-[8px]">
+                                                <Timer/>
+                                                <span>3:12:00</span>
+                                            </div>
+                                            <div className="voting flex-center gap-[8px]">
+                                                <Star/>
+                                                <span>{movie.vote_average}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p className="w-[800px]">{movie.overview}</p>
+                                    <p className="w-auto md:w-[800px]">{movie.overview}</p>
                                 </div>
                             </div>
                         </SwiperSlide>

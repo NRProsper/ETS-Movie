@@ -21,7 +21,8 @@ const App = () => {
             </main>
             <Footer />
         </>
-    )
-}
+    );
+};
+
 
 export default App

@@ -10,7 +10,7 @@ const TrendCard = ({movie, genres}) => {
         <div
              className="overflow-hidden"
         >
-            <div className="h-[341px] w-[352px] trend-card relative cursor-pointer">
+            <div className="h-[200px] lg:h-[341px] lg:w-full trend-card relative cursor-pointer">
                 <img
                     src={movieService.getPoster(movie.poster_path)}
                     alt={movie.title||movie.name}
@@ -31,16 +31,18 @@ const TrendCard = ({movie, genres}) => {
                     <Play className="text-6xl" />
                 </div>
             </div>
-            <div className="bottom mt-2 flex items-center justify-between">
+            <div className="bottom mt-2 flex flex-col items-center justify-between">
                 <div>
                     <h2 className="font-medium truncate text-truncate text-[18px]">{movie.title || movie.name}</h2>
                 </div>
-                <div className="genres flex-center gap-[16px]">
+                <div className="genres flex flex-col md:flex-row md:flex-center gap-[16px]">
                     {
                         genres.slice(0,2).map((genre, idx) => (
-                            <span className="pill" key={idx}>{genre}</span>
+                            <span className="pill w-[200px] text-center md:w-auto" key={idx}>{genre}</span>
                         ))
                     }
+                    {/*<span className="pill">Action</span>*/}
+                    {/*<span className="pill">Fantacy</span>*/}
                 </div>
             </div>
         </div>

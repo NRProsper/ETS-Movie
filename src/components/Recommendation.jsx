@@ -47,9 +47,9 @@ const Recommendation = () => {
 
     return (
         <section id="recommedation">
-            <div className="container mx-auto px-32">
-                <div className="flex-between mb-8">
-                    <div className="flex-center gap-4">
+            <div className="container mx-auto px-16 lg:px-32">
+                <div className="flex-between flex-col md:flex-row mb-8">
+                    <div className="flex-center flex-col md:flex-row gap-4">
                         <h2 className="text-2xl font-bold">Recommended</h2>
                         <div className="filter flex-center gap-4">
                             {filters.map(f => (
@@ -70,7 +70,7 @@ const Recommendation = () => {
                 </div>
                 <div className="flex flex-wrap justify-between">
                     {movies.slice(0, 8).map((movie, idx) => (
-                        <div key={idx} className="w-1/4 p-4">
+                        <div key={idx} className="w-full md:w-1/2 xl:w-1/4 p-4">
                             <MovieCard  movie={movie} tv={filter !== 1} />
                         </div>
                     ))}
