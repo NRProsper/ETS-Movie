@@ -7,12 +7,15 @@ const Nav = () => {
     const links = ["Home", "Genre", "Country", "Movies", "Series", "Animation"]
 
     const [isOpen, setIsOpen] = useState(false)
+    const handleClick = () => {
+        setIsOpen(!isOpen);
+    }
 
     return (
         <>
             <div id="navigation" className="h-[80px] lg:flex flex-center">
                 <div className="container mx-auto">
-                    <div className="navigation-container flex-center">
+                    <div className="navigation-container flex-center relative z-10">
                         <nav className="flex-between md:flex-center gap-6">
                             <div className=" hidden left md:flex-center gap-6">
                                 {
@@ -47,15 +50,14 @@ const Nav = () => {
                                 Login/Signup
                                 <Bell className="ml-2"/>
                             </a>
-                            <div className="visible ms-12 md:hidden menu-toggler cursor-pointer ">
+                            <div onClick={() => setIsOpen(!isOpen)}  className="visible ms-12 md:hidden menu-toggler cursor-pointer ">
                                 <Bars/>
                             </div>
                         </nav>
                     </div>
                 </div>
             </div>
-            <div className="opacity-0 transition-all
-             mobile-nav z-[99] bg-black absolute top-[80px] right-0 h-full w-full md:hidden">
+            <div id="mobile-nav" className={`transition-all transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'} z-[99] bg-black absolute top-[80px] right-0 h-full w-full md:hidden`}>
                 <div className="navigation h-full flex flex-col items-center justify-center space-y-16">
                     {
                         links.map((link, idx) => (
