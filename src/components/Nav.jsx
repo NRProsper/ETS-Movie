@@ -1,15 +1,21 @@
 import {BiSearch} from "react-icons/bi";
 import {BiBell as Bell} from "react-icons/bi";
 import {FaBars as Bars} from "react-icons/fa6";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Nav = () => {
     const links = ["Home", "Genre", "Country", "Movies", "Series", "Animation"]
 
     const [isOpen, setIsOpen] = useState(false)
-    const handleClick = () => {
-        setIsOpen(!isOpen);
-    }
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add("overflow-hidden")
+        }else {
+            document.body.classList.remove("overflow-hidden")
+        }
+
+    }, [isOpen]);
 
     return (
         <>
