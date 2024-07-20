@@ -1,12 +1,13 @@
-import {BiSearch} from "react-icons/bi";
-import {BiBell as Bell} from "react-icons/bi";
+import {BiBell as Bell, BiSearch} from "react-icons/bi";
 import {FaBars as Bars} from "react-icons/fa6";
 import {useEffect, useState} from "react";
+import {Link, NavLink} from "react-router-dom";
 
 const Nav = () => {
-    const links = ["Home", "Genre", "Country", "Movies", "Series", "Animation"]
+    const links = ["home", "genre", "country", "movies", "series", "animation"]
 
     const [isOpen, setIsOpen] = useState(false)
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
@@ -17,9 +18,23 @@ const Nav = () => {
 
     }, [isOpen]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            setScrolled(scrollTop > 30);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <>
-            <div id="navigation" className="h-[80px] lg:flex flex-center">
+            <div id="navigation" className={`h-[80px] lg:flex flex-center fixed w-full top-0 z-[999] transition-all duration-300 ${
+                scrolled ? 'bg-black bg-opacity-70 backdrop-blur-md' : ''
+            }`}>
                 <div className="container mx-auto">
                     <div className="navigation-container flex-center relative z-10">
                         <nav className="flex-between md:flex-center gap-6">
@@ -27,10 +42,15 @@ const Nav = () => {
                                 {
                                     links.slice(0, 3).map((item, idx) => {
                                         return (
-                                            <a key={idx} href="#"
-                                               className={idx === 0 ? 'nav-item active' : 'nav-item'}>
+                                            <NavLink key={idx}
+                                                     to={item==="home"?"":item}
+                                                     className={({isActive}) =>
+                                                     isActive
+                                                         ?'nav-item active':'nav-item'
+                                            }
+                                               >
                                                 {item}
-                                            </a>
+                                            </NavLink>
                                         )
                                     })
                                 }
@@ -45,9 +65,9 @@ const Nav = () => {
                                 {
                                     links.slice(3, 6).map((item, idx) => {
                                         return (
-                                            <a key={idx} href="#" className="nav-item">
+                                            <NavLink key={idx} to={item} className="nav-item">
                                                 {item}
-                                            </a>
+                                            </NavLink>
                                         )
                                     })
                                 }

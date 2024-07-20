@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import Button from "./Button.jsx";
+import {Link} from "react-router-dom";
 
 
 const Hero = () => {
@@ -71,10 +72,10 @@ const Hero = () => {
                             <div
                                 className="movie-content lg:px-32 container mx-auto h-full flex flex-col justify-center items-start space-y-16">
                                 <div className="flex-col sm:flex-row play-btns w-full flex  items-center justify-center gap-[44px]  ">
-                                    <Button type="primary">
+                                    <Link to={`watch-movie/${movie.id}`} className="btn btn-primary">
                                         <span>Watch now</span>
                                         <Play/>
-                                    </Button>
+                                    </Link>
                                     <Button type="outline">
                                         <span>Watch later</span>
                                         <FaClock/>
