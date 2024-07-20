@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    cursor: pointer;
+}
+::-webkit-scrollbar-track {
+    background: black;
+}
+
 .preloader-animation {
     transition: opacity .3s;
     transform:  translate3d(-50%, -50%, 0);
@@ -62,6 +74,8 @@ body {
         font-weight: 600;
         padding: 10px 0;
         transition: 0.3s ease;
+        cursor: pointer;
+        text-transform: capitalize;
     }
 
     .nav-item:not(.active) {
@@ -77,6 +91,7 @@ body {
         width: 5px;
         height: 5px;
         @apply bg-[red];
+        transition: 0.3s ease;
     }
 
     .movie-slider {
@@ -163,3 +178,11 @@ body {
 .pill-outline {
     @apply p-[8px] rounded-[10px] border border-[red]
 }
+
+.more-details p {
+    font-weight: 400;
+    line-height: 24px;
+    @apply font-light
+}
+
+
