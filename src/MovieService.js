@@ -34,8 +34,16 @@ export default {
     getPopularSeries() {
         return apiClient.get(`tv/popular?api_key=${API_KEY}`);
     },
-
+    getMoviesByGenre(genreId) {
+        return apiClient.get(`discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
+    },
     getPoster(url) {
         return `https://image.tmdb.org/t/p/original/${url}`
+    },
+    getMovieById(movieId) {
+        return apiClient.get(`movie/${movieId}?api_key=${API_KEY}`);
+    },
+    getMovieVideos(movieId) {
+        return apiClient.get(`movie/${movieId}/videos?api_key=${API_KEY}`);
     }
 }
