@@ -7,7 +7,8 @@ import {Root} from "./routes/Root.jsx";
 import {Home} from "./routes/Home.jsx";
 import ErrorPage from "./routes/404Page.jsx";
 import WatchMovie from "./routes/WatchMovie.jsx";
-import {movieLoader} from "./loaders.js";
+import {movieLoader, allMoviesLoader} from "./loaders.js";
+import Movies from "./routes/Movies.jsx";
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
                 path: "watch-movie/:movieId",
                 element: <WatchMovie />,
                 loader: movieLoader
+            },
+            {
+                path: "movies",
+                element: <Movies />,
+                loader: allMoviesLoader
             }
         ]
     }

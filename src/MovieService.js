@@ -13,6 +13,9 @@ const apiClient = axios.create({
 
 
 export default {
+    getMovies(page = 1) {
+        return apiClient.get(`movie/popular?api_key=${API_KEY}&page=${page}`);
+    },
     getNowPlaying() {
         return apiClient.get("movie/now_playing?api_key="+API_KEY)
     },

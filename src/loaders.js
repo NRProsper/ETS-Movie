@@ -9,3 +9,15 @@ export const movieLoader = async ({params}) => {
         throw new Error("Failed to fetch movie data");
     }
 }
+
+export const allMoviesLoader = async ({ request }) => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || 1; // Default to page 1 if not provided
+
+    try {
+        const response = await movieService.getMovies(page);
+        return { allMovies: response.data.results, totalPages: response.data.total_pages };
+    } catch (error) {
+        throw new Error("Failed to fetch movies");
+    }
+}
