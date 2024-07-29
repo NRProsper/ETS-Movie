@@ -2,12 +2,13 @@ import movieService from "../MovieService.js";
 import {CiTimer as Timer} from "react-icons/ci";
 import {BiSolidStar as Star} from "react-icons/bi";
 import {FaPlayCircle as Play} from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 const TrendCard = ({movie, genres}) => {
 
 
     return (
-        <div
+        <Link to={`watch-movie/${movie.id}`}
              className="overflow-hidden"
         >
             <div className="h-[200px] lg:h-[341px] lg:w-full trend-card relative cursor-pointer">
@@ -45,7 +46,7 @@ const TrendCard = ({movie, genres}) => {
                     {/*<span className="pill">Fantacy</span>*/}
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
