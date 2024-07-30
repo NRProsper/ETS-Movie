@@ -3,7 +3,7 @@ import {Root} from "./routes/Root.jsx";
 import ErrorPage from "./routes/404Page.jsx";
 import {Home} from "./routes/Home.jsx";
 import WatchMovie from "./routes/WatchMovie.jsx";
-import {allSeriesLoader, movieLoader} from "./loaders.js";
+import {movieLoader} from "./loaders.js";
 import Movies from "./routes/Movies.jsx";
 import Series from "./routes/Series.jsx";
 
