@@ -1,55 +1,65 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_KEY = import.meta.env.VITE_API_KEY
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const apiClient = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
-    withCredentials: false,
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
     }
-})
+});
 
-
-export default {
-    getMovies(page = 1) {
-        return apiClient.get(`movie/popular?api_key=${API_KEY}&page=${page}`);
+const movieService = {
+    getMovies: async (page = 1) => {
+        const response = await apiClient.get(`movie/popular?api_key=${API_KEY}&page=${page}`);
+        return response.data;
     },
-    getSeries(page = 1) {
-        return apiClient.get(`tv/popular?api_key=${API_KEY}&page=${page}`);
+    getSeries: async (page = 1) => {
+        const response = await apiClient.get(`tv/popular?api_key=${API_KEY}&page=${page}`);
+        return response.data;
     },
-    getNowPlaying() {
-        return apiClient.get("movie/now_playing?api_key="+API_KEY)
+    getNowPlaying: async () => {
+        const response = await apiClient.get(`movie/now_playing?api_key=${API_KEY}`);
+        return response.data;
     },
-    getPopularMovies() {
-        return apiClient.get("movie/popular?api_key="+API_KEY)
+    getPopularMovies: async () => {
+        const response = await apiClient.get(`movie/popular?api_key=${API_KEY}`);
+        return response.data;
     },
-    getTrending() {
-        return apiClient.get("trending/all/day?api_key="+API_KEY)
+    getTrending: async () => {
+        const response = await apiClient.get(`trending/all/day?api_key=${API_KEY}`);
+        return response.data;
     },
-    getUpcomingMovies() {
-        return apiClient.get("movie/upcoming?api_key="+API_KEY)
+    getUpcomingMovies: async () => {
+        const response = await apiClient.get(`movie/upcoming?api_key=${API_KEY}`);
+        return response.data;
     },
-    getGenres() {
-        return apiClient.get(`genre/movie/list?api_key=${API_KEY}`);
+    getGenres: async () => {
+        const response = await apiClient.get(`genre/movie/list?api_key=${API_KEY}`);
+        return response.data;
     },
-    getAiring() {
-        return apiClient.get(`tv/airing_today?api_key=${API_KEY}`);
+    getAiring: async () => {
+        const response = await apiClient.get(`tv/airing_today?api_key=${API_KEY}`);
+        return response.data;
     },
-    getPopularSeries() {
-        return apiClient.get(`tv/popular?api_key=${API_KEY}`);
+    getPopularSeries: async () => {
+        const response = await apiClient.get(`tv/popular?api_key=${API_KEY}`);
+        return response.data;
     },
-    getMoviesByGenre(genreId) {
-        return apiClient.get(`discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
+    getMoviesByGenre: async (genreId) => {
+        const response = await apiClient.get(`discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
+        return response.data;
     },
-    getPoster(url) {
-        return `https://image.tmdb.org/t/p/original/${url}`
+    getPoster: (url) => `https://image.tmdb.org/t/p/original/${url}`,
+    getMovieById: async (movieId) => {
+        const response = await apiClient.get(`movie/${movieId}?api_key=${API_KEY}`);
+        return response.data;
     },
-    getMovieById(movieId) {
-        return apiClient.get(`movie/${movieId}?api_key=${API_KEY}`);
-    },
-    getMovieVideos(movieId) {
-        return apiClient.get(`movie/${movieId}/videos?api_key=${API_KEY}`);
+    getMovieVideos: async (movieId) => {
+        const response = await apiClient.get(`movie/${movieId}/videos?api_key=${API_KEY}`);
+        return response.data;
     }
-}
+};
+
+export default movieService;

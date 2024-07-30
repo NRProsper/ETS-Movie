@@ -14,8 +14,8 @@ const WatchMovie = () => {
     useEffect(() => {
         movieService.getMovieVideos(movieId)
             .then((response) => {
-                setVideos(response.data.results)
-                setCurrentVideo(response.data.results[0])
+                setVideos(response.results)
+                setCurrentVideo(response.results[0])
             })
             .catch((error) => {
                 console.log(error)

@@ -1,8 +1,7 @@
-import {useEffect, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay, EffectFade, Pagination} from "swiper/modules"
 import {BiCalendar as Calendar, BiSolidStar as Star} from "react-icons/bi";
-import {FaPlayCircle as Play, FaClock} from "react-icons/fa";
+import {FaClock, FaPlayCircle as Play} from "react-icons/fa";
 import {CiTimer as Timer} from "react-icons/ci";
 import movieService from "../MovieService.js";
 
@@ -13,34 +12,7 @@ import Button from "./Button.jsx";
 import {Link} from "react-router-dom";
 
 
-const Hero = () => {
-    const [nowPlaying, setNowPlaying] = useState([])
-    const [genres, setGenres] = useState({})
-
-    useEffect(() => {
-        movieService.getNowPlaying()
-            .then((response) => {
-                setNowPlaying(response.data.results)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-
-        movieService.getGenres()
-            .then((response) => {
-                const genresMap = {}
-                const genresArray = response.data.genres
-                genresArray.forEach(genre => {
-                    genresMap[genre.id] = genre.name;
-                });
-                setGenres(genresMap)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-    }, [])
-
+const Hero = ({data, genres}) => {
     const getGenreNames = (genreIds) => {
         return genreIds.map(id => genres[id]);
     };
@@ -59,7 +31,7 @@ const Hero = () => {
                     autoplay={true}
                     effect="fade"
                 >
-                    {nowPlaying.slice(0, 5).map(movie => (
+                    {data.slice(0, 5).map(movie => (
                         <SwiperSlide
                             className=""
                             key={movie.id}

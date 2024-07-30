@@ -1,22 +1,8 @@
 import {FaArrowRight as Arrow} from "react-icons/fa";
-import {useEffect, useState} from "react";
-import movieService from "../MovieService.js";
 import MovieCard from "./MovieCard.jsx";
 
-const Releases = () => {
+const Releases = ({data}) => {
 
-    const [movies, setMovies] = useState([])
-
-    useEffect(() => {
-        movieService.getUpcomingMovies()
-            .then((response) => {
-                setMovies(response.data.results)
-                console.log(response.data.results)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }, []);
 
     return(
         <section id="releases" className="my-16">
@@ -29,7 +15,7 @@ const Releases = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-1  md:grid-cols-2 md:gap-x-6 xl:grid-cols-4 lg:space-y-0 gap-y-12 lg:gap-x-36 xl:gap-x-12">
-                    {movies.slice(0, 4).map((movie, idx) => (
+                    {data.slice(0, 4).map((movie, idx) => (
                         <MovieCard key={idx} movie={movie} />
                     ))}
                 </div>

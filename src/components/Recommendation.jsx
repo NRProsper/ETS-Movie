@@ -1,11 +1,9 @@
 import {FaArrowRight as Arrow} from "react-icons/fa";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import MovieCard from "./MovieCard.jsx";
-import movieService from "../MovieService.js";
 
 
-
-const Recommendation = () => {
+const Recommendation = ({movies, series}) => {
 
     const filters = [
         {
@@ -23,27 +21,19 @@ const Recommendation = () => {
     ]
 
     let [filter, setFilter] = useState(1);
-    let [movies, setMovies] = useState([]);
 
-    useEffect(() => {
-        if(filter===1) {
-            movieService.getPopularMovies()
-                .then((response) => {
-                    setMovies(response.data.results)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }else if(filter === 2) {
-            movieService.getPopularSeries()
-                .then((response) => {
-                    setMovies(response.data.results)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+    const getFilteredData = () => {
+        switch (filter) {
+            case 1:
+                return movies;
+            case 2:
+                return series;
+            default:
+                return [];
         }
-    }, [filter]);
+    };
+
+    const filteredData = getFilteredData();
 
     return (
         <section id="recommedation">
@@ -69,7 +59,7 @@ const Recommendation = () => {
                     </div>
                 </div>
                 <div className="flex flex-wrap justify-between">
-                    {movies.slice(0, 8).map((movie, idx) => (
+                    {filteredData.slice(0, 8).map((movie, idx) => (
                         <div key={idx} className="w-full md:w-1/2 xl:w-1/4 p-4">
                             <MovieCard  movie={movie} tv={filter !== 1} />
                         </div>
