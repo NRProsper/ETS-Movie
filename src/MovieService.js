@@ -59,6 +59,24 @@ const movieService = {
     getMovieVideos: async (movieId) => {
         const response = await apiClient.get(`movie/${movieId}/videos?api_key=${API_KEY}`);
         return response.data;
+    },
+    getTvDetails: async (tvId) => {
+        const response = await apiClient.get(`tv/${tvId}?api_key=${API_KEY}`);
+        return response.data;
+    },
+    getSeriesVideo: async (tvId) => {
+        const response = await apiClient.get(`tv/${tvId}/videos?api_key=${API_KEY}`);
+        return response.data;
+    },
+    searchMulti: async (query) => {
+        const response = await apiClient.get(`search/multi`, {
+            params: {
+                api_key: API_KEY,
+                query,
+                include_adult: false
+            }
+        });
+        return response.data.results;
     }
 };
 
