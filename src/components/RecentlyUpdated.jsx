@@ -1,5 +1,3 @@
-import movieService from "../MovieService.js";
-import {useEffect, useState} from "react";
 import AirCard from "./AirCard.jsx";
 import {FaArrowRight as Arrow} from "react-icons/fa";
 
@@ -13,8 +11,7 @@ const RecentlyUpdated = ({data}) => {
                     <div className="flex items-end justify-between">
                         <div className="air-cards mt-12 flex items-center justify-start gap-20">
                             {data.slice(0, 4).map(air => (
-                                <AirCard key={air.id} title={air.original_name}
-                                         img={movieService.getPoster(air.poster_path)}/>
+                                <AirCard key={air.id} movie={air}/>
                             ))}
                         </div>
                         <div

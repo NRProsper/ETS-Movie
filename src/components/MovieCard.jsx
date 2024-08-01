@@ -3,7 +3,7 @@ import {CiTimer as Timer} from "react-icons/ci";
 import {Link} from "react-router-dom";
 const MovieCard = ({movie, tv, className}) => {
     return(
-        <Link to={`/watch-movie/${movie.id}`} className="flex flex-col space-y-2 cursor-pointer">
+        <Link to={!tv?`/watch-movie/${movie.id}`:`/watch-series/${movie.id}`} className="flex flex-col space-y-2 cursor-pointer hover:opacity-60 transition-opacity">
             <div className={`image-container w-[full] relative ${className}`}>
                 <img src={movieService.getPoster(movie.poster_path)} alt="" className="rounded-[10px]"/>
                 {
