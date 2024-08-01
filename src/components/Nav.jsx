@@ -1,21 +1,42 @@
 import {BiBell as Bell, BiSearch} from "react-icons/bi";
 import {FaBars as Bars} from "react-icons/fa6";
 import {useEffect, useState} from "react";
-import {Link, NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
+import SearchResults from "./SearchResults.jsx";
+import {useQuery} from "@tanstack/react-query";
+import movieService from "../MovieService.js";
+
+const useSearch = (query) => {
+    return(
+        useQuery({
+            queryKey: ["search-movies"],
+            queryFn: () => movieService.searchMulti(query),
+        })
+    )
+}
 
 const Nav = () => {
     const links = ["home", "genre", "country", "movies", "series", "animation"]
 
     const [isOpen, setIsOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false);
+    const [query, setQuery] = useState("");
+    const [showSearchResults, setShowSearchResults] = useState(false);
+
+    const { data: searchResults, isFetching, refetch } = useSearch(query);
+    const location = useLocation(); // Hook to monitor location changes
+
+    const closeSearchResults = () => {
+        setQuery(""); // Clear the query
+        setShowSearchResults(false); // Hide search results
+    }
 
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add("overflow-hidden")
-        }else {
+        } else {
             document.body.classList.remove("overflow-hidden")
         }
-
     }, [isOpen]);
 
     useEffect(() => {
@@ -29,6 +50,48 @@ const Nav = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setShowSearchResults(false); // Hide search results on Esc key press
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
+    useEffect(() => {
+        setShowSearchResults(false); // Hide search results on location change
+    }, [location]);
+
+    const handleQueryChange = (e) => {
+        const newValue = e.target.value;
+        setQuery(newValue);
+
+        if (newValue.trim() === "") {
+            setShowSearchResults(false); // Hide search results when input is empty
+        } else {
+            setShowSearchResults(true); // Show search results when input is not empty
+        }
+    }
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (query.trim()) {
+            refetch();
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            handleSearchSubmit(e);
+        }
+    }
 
     return (
         <>
@@ -45,10 +108,10 @@ const Nav = () => {
                                             <NavLink key={idx}
                                                      to={item==="home"?"":item}
                                                      className={({isActive}) =>
-                                                     isActive
-                                                         ?'nav-item active':'nav-item'
-                                            }
-                                               >
+                                                         isActive
+                                                             ?'nav-item active':'nav-item'
+                                                     }
+                                            >
                                                 {item}
                                             </NavLink>
                                         )
@@ -57,8 +120,14 @@ const Nav = () => {
                             </div>
                             <div
                                 className="flex-center px-4 py-2 rounded-[25px] bg-white w-[300px] xl:w-[416] lg:w-[350px] md:w-[100px]">
-                                <input type="text" placeholder="Search Movies..."
-                                       className="outline-0 border-o text-black w-full bg-transparent"/>
+                                <input
+                                    value={query}
+                                    onChange={handleQueryChange}
+                                    onKeyDown={handleKeyDown}
+                                    type="text"
+                                    placeholder="Search Movies..."
+                                    className="outline-0 border-o text-black w-full bg-transparent"
+                                />
                                 <BiSearch fill="#000" className="text-[20px] ml-[10px]"/>
                             </div>
                             <div className="hidden right md:flex-center gap-6">
@@ -101,9 +170,11 @@ const Nav = () => {
                     </a>
                 </div>
             </div>
+            {showSearchResults && searchResults && (
+                <SearchResults results={searchResults} onClose={closeSearchResults} />
+            )}
         </>
     )
 }
-
 
 export default Nav;
