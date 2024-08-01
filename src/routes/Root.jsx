@@ -1,7 +1,7 @@
 import Nav from "../components/Nav.jsx";
 import {Outlet} from "react-router-dom";
 import Footer from "../components/Footer.jsx";
-git
+
 export function Root() {
     return(
         <>
