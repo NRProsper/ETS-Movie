@@ -6,6 +6,7 @@ import SeriesRelease from "../components/SeriesRelease.jsx";
 import Recommendation from "../components/Recommendation.jsx";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "../MovieService.js";
+import Loader from "../components/Loader.jsx";
 
 //Fetching all data needed by Home Page sections and passing them as props😁
 const useHomeData = () => {
@@ -43,7 +44,7 @@ export function Home() {
 
     const { data, error, isLoading } = useHomeData();
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader />;
     if (error) return <div>Error loading data</div>;
 
     return(

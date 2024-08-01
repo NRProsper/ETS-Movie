@@ -3,6 +3,7 @@ import MovieCard from "../components/MovieCard.jsx";
 import Pagination from "../components/Pagination.jsx";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "../MovieService.js";
+import Loader from "../components/Loader.jsx";
 
 const useAllMovies = (page) => {
     return useQuery({
@@ -21,7 +22,7 @@ export default function Movies() {
         setSearchParams({ page });
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader />;
     if (error) return <div>Error loading data</div>;
 
     const { results: movies, total_pages: totalPages } = data;
