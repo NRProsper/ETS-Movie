@@ -8,7 +8,7 @@ const TrendCard = ({movie, genres}) => {
 
 
     return (
-        <Link to={!tv?`/watch-movie/${movie.id}`:`/watch-series/${movie.id}`}
+        <Link to={movie.media_type === "movie" ? `/watch-movie/${movie.id}`: `/watch-series/${movie.id}`}
              className="overflow-hidden"
         >
             <div className="h-[200px] lg:h-[341px] lg:w-full trend-card relative cursor-pointer">

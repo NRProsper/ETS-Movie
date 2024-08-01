@@ -1,6 +1,4 @@
 import {FaArrowRight as Arrow} from "react-icons/fa";
-import {useEffect, useState} from "react";
-import movieService from "../MovieService.js";
 import TrendCard from "./TrendCard.jsx";
 
 
