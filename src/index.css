@@ -216,6 +216,24 @@ body {
     animation-delay: 0.4s;
 }
 
+.skeleton-loader {
+    background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 10px; /* Match the image border-radius */
+    width: 284px;
+    height: 426px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
 @keyframes bounce {
     from {
         transform: translateY(0);

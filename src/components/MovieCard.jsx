@@ -1,14 +1,24 @@
 import movieService from "../MovieService.js";
 import {CiTimer as Timer} from "react-icons/ci";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 const MovieCard = ({movie, tv, className}) => {
+    const [isLoading, setIsLoading] = useState(true)
     return(
         <Link to={!tv?`/watch-movie/${movie.id}`:`/watch-series/${movie.id}`} className="flex flex-col space-y-2 cursor-pointer hover:opacity-60 transition-opacity">
             <div className={`image-container w-[full] relative ${className}`}>
-                <img src={movieService.getPoster(movie.poster_path)} alt="" className="rounded-[10px]"/>
+                {isLoading && (
+                    <div className="skeleton-loader bg-gray-300 rounded-[10px]"></div>
+                )}
+                <img
+                    src={movieService.getPoster(movie.poster_path)}
+                    alt="Movie card"
+                    className={`rounded-[10px] ${isLoading ? 'hidden' : 'block'}`}
+                    onLoad={() => setIsLoading(false)}
+                />
                 {
                     tv ? (
-                        <span className="pill absolute top-0 mx-[16px] mt-[8px]">EP3</span>
+                        !isLoading && <span className="pill absolute top-0 mx-[16px] mt-[8px]">EP3</span>
                     ) : ""
                 }
             </div>
