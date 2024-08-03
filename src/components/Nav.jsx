@@ -1,7 +1,7 @@
 import {BiBell as Bell, BiSearch} from "react-icons/bi";
 import {FaBars as Bars} from "react-icons/fa6";
 import {useEffect, useState} from "react";
-import {NavLink, useLocation} from "react-router-dom";
+import {Link, NavLink, useLocation} from "react-router-dom";
 import SearchResults from "./SearchResults.jsx";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "../MovieService.js";
@@ -141,10 +141,10 @@ const Nav = () => {
                                     })
                                 }
                             </div>
-                            <a href="" className="hidden sm:flex-center nav-item">
+                            <Link to="/login" className="hidden sm:flex-center nav-item">
                                 Login/Signup
                                 <Bell className="ml-2"/>
-                            </a>
+                            </Link>
                             <div onClick={() => setIsOpen(!isOpen)}  className="visible ms-12 md:hidden menu-toggler cursor-pointer ">
                                 <Bars/>
                             </div>

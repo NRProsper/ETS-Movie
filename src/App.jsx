@@ -8,6 +8,7 @@ import Movies from "./routes/Movies.jsx";
 import Series from "./routes/Series.jsx";
 import WatchSeries from "./routes/WatchSeries.jsx";
 import MovieReleases from "./routes/MovieReleases.jsx";
+import LoginSignUp from "./routes/LoginSignUp.jsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home />
+            },
+            {
+                path:"login",
+                element: <LoginSignUp />
             },
             {
                 path: "watch-movie/:movieId",
