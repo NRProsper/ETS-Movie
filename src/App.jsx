@@ -25,6 +25,10 @@ const router = createBrowserRouter([
                 element: <LoginSignUp />
             },
             {
+                path:"auth",
+                element: <LoginSignUp />
+            },
+            {
                 path: "watch-movie/:movieId",
                 element: <WatchMovie />,
                 loader: movieLoader

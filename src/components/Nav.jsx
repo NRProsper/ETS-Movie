@@ -141,7 +141,7 @@ const Nav = () => {
                                     })
                                 }
                             </div>
-                            <Link to="/login" className="hidden sm:flex-center nav-item">
+                            <Link to="/auth" className="hidden sm:flex-center nav-item">
                                 Login/Signup
                                 <Bell className="ml-2"/>
                             </Link>
