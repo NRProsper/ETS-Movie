@@ -243,3 +243,6 @@ body {
     }
 }
 
+.form-error {
+    @apply text-red-600 text-sm mt-1 font-medium block;
+}
