@@ -9,50 +9,51 @@ import Series from "./routes/Series.jsx";
 import WatchSeries from "./routes/WatchSeries.jsx";
 import MovieReleases from "./routes/MovieReleases.jsx";
 import LoginSignUp from "./routes/LoginSignUp.jsx";
+import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/',
         element: <Root />,
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "",
-                element: <Home />
+                path: '',
+                element: <Home />,
             },
             {
-                path:"login",
-                element: <LoginSignUp />
+                path: 'login',
+                element: <LoginSignUp />,
             },
             {
-                path:"auth",
-                element: <LoginSignUp />
+                path: 'auth',
+                element: <LoginSignUp />,
             },
             {
-                path: "watch-movie/:movieId",
-                element: <WatchMovie />,
-                loader: movieLoader
+                path: 'watch-movie/:movieId',
+                element: <ProtectedRoute element={<WatchMovie />} />,
+                loader: movieLoader,
             },
             {
-                path: "watch-series/:tvId",
-                element: <WatchSeries />,
-                loader: tvLoader
+                path: 'watch-series/:tvId',
+                element: <ProtectedRoute element={<WatchSeries />} />,
+                loader: tvLoader,
             },
             {
-                path: "movies",
+                path: 'movies',
                 element: <Movies />,
             },
             {
-                path: "new-releases/movies",
-                element: <MovieReleases />
+                path: 'new-releases/movies',
+                element: <MovieReleases />,
             },
             {
-                path: "series",
+                path: 'series',
                 element: <Series />,
-            }
-        ]
-    }
-])
+            },
+        ],
+    },
+]);
 
 
 const App = () => (

@@ -1,7 +1,17 @@
 import InputText from "../InputText.jsx";
 import { useState } from "react";
-import { isEmailValid, isPasswordValid, doPasswordsMatch } from "../../../utils/validation.js";
+import {
+    isEmailValid,
+    isPasswordValid,
+    doPasswordsMatch
+} from "../../utils/validation.js";
+
+import {toast} from "react-toastify";
+
 import ActionButton from "./ActionButton.jsx";
+
+import {createUserWithEmailAndPassword} from "firebase/auth"
+import {auth} from "../../config/firebaseConfig.js";
 
 export default function SignUp() {
     const [formValues, setFormValues] = useState({
@@ -32,6 +42,23 @@ export default function SignUp() {
     };
 
     const hasErrors = Object.values(errors).some(error => error !== "");
+
+    const handleSignUp = async () => {
+        await toast.promise(
+            createUserWithEmailAndPassword(auth, formValues.email, formValues.password),
+            {
+                pending: 'Registering user...',
+                success: 'User registered successfully!',
+                error: 'Error: Try a different email, check you internet connection'
+            },
+            {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeButton: true
+            }
+        );
+    }
 
 
     return (
@@ -78,6 +105,7 @@ export default function SignUp() {
             <div className="flex items-center justify-end">
                 <ActionButton
                     isDisabled={hasErrors}
+                    onClick={handleSignUp}
                 >
                     Sign up
                 </ActionButton>

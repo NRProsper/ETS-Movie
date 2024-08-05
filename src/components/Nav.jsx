@@ -5,6 +5,11 @@ import {Link, NavLink, useLocation} from "react-router-dom";
 import SearchResults from "./SearchResults.jsx";
 import {useQuery} from "@tanstack/react-query";
 import movieService from "../MovieService.js";
+import {useDispatch, useSelector} from "react-redux";
+import {clearUser} from "../store/userSlice.js";
+import {toast} from "react-toastify";
+import { signOut } from 'firebase/auth';
+import {auth} from "../config/firebaseConfig.js";
 
 const useSearch = (query) => {
     return(
@@ -16,6 +21,32 @@ const useSearch = (query) => {
 }
 
 const Nav = () => {
+    const email = useSelector((state) => state.user.email);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        toast.promise(
+            signOut(auth).then(() => {
+                dispatch(clearUser());
+                return 'Logged out successfully!';
+            }),
+            {
+                pending: 'Logged out...',
+                success: (message) => message,
+                error: (error) => {
+                    console.error('Logout error:', error);
+                    return error.message || 'Logout failed. Please try again.';
+                }
+            },
+            {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeButton: true
+            }
+        );
+    };
+
     const links = ["home", "genre", "country", "movies", "series", "animation"]
 
     const [isOpen, setIsOpen] = useState(false)
@@ -141,10 +172,19 @@ const Nav = () => {
                                     })
                                 }
                             </div>
-                            <Link to="/auth" className="hidden sm:flex-center nav-item">
-                                Login/Signup
-                                <Bell className="ml-2"/>
-                            </Link>
+                            {email ? (
+                                <div className="flex items-center">
+                                    <span className="mr-2">{email}</span>
+                                    <button onClick={handleLogout} className="nav-item">
+                                        Logout
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link to="/auth" className="hidden sm:flex-center nav-item">
+                                    Login/Signup
+                                    <Bell className="ml-2"/>
+                                </Link>
+                            )}
                             <div onClick={() => setIsOpen(!isOpen)}  className="visible ms-12 md:hidden menu-toggler cursor-pointer ">
                                 <Bars/>
                             </div>
@@ -156,18 +196,18 @@ const Nav = () => {
                 <div className="navigation h-full flex flex-col items-center justify-center space-y-16">
                     {
                         links.map((link, idx) => (
-                            <a
+                            <Link to={link==="home"? "" : link}
                                 key={idx}
                                 className="text-2xl"
                             >{link}
-                            </a>
+                            </Link>
                         ))
 
                     }
-                    <a href="" className="btn btn-primary hidden md:flex-center nav-item">
+                    <Link to={"/auth"} className="btn btn-primary hidden md:flex-center nav-item">
                         Login/Signup
                         <Bell className="ml-2"/>
-                    </a>
+                    </Link>
                 </div>
             </div>
             {showSearchResults && searchResults && (
